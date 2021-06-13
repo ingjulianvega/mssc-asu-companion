@@ -8,7 +8,7 @@ import ingjulianvega.ximic.msscasucompanion.web.model.CompanionList;
 import java.util.UUID;
 
 public interface CompanionService {
-    CompanionList get();
+    CompanionList get(Boolean usingCache);
 
     CompanionDto getById(UUID id);
 

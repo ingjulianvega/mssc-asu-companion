@@ -33,7 +33,7 @@ public interface CompanionI {
     @RequestMapping(value = "/",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<CompanionList> get();
+    ResponseEntity<CompanionList> get(@Parameter(in = ParameterIn.QUERY, description = "The using of cache", required = true, schema = @Schema()) Boolean usingCache);
 
     @Operation(summary = "Endpoint to get the information of a companion given the id", description = "Returns a companion", tags = {"companion"})
     @ApiResponses(value = {

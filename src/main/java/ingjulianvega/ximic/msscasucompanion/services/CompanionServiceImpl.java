@@ -24,9 +24,9 @@ public class CompanionServiceImpl implements CompanionService {
     private final CompanionRepository companionRepository;
     private final CompanionMapper companionMapper;
 
-    @Cacheable(cacheNames = "companionListCache")
+    @Cacheable(cacheNames = "companionListCache", condition = "#usingCache == false")
     @Override
-    public CompanionList get() {
+    public CompanionList get(Boolean usingCache) {
         log.debug("get()...");
         return CompanionList
                 .builder()

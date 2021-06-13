@@ -21,8 +21,8 @@ public class CompanionController implements CompanionI {
     private final CompanionService companionService;
 
     @Override
-    public ResponseEntity<CompanionList> get() {
-        return new ResponseEntity<>(companionService.get(), HttpStatus.OK);
+    public ResponseEntity<CompanionList> get(Boolean usingCache) {
+        return new ResponseEntity<>(companionService.get(usingCache), HttpStatus.OK);
     }
 
     @Override
