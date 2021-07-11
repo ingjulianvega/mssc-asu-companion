@@ -8,17 +8,8 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "recommendation")
+@ConfigurationProperties(prefix = "companion")
 public class CompanionParameters {
 
-    private String success;
-    private String prefix;
-    private Error error;
-    private String channelId;
-
-    @Getter
-    @Setter
-    public static class Error {
-        private String general;
-    }
+    private String api;
 }
