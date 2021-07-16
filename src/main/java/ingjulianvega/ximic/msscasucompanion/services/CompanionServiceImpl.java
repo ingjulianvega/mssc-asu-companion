@@ -12,6 +12,7 @@ import ingjulianvega.ximic.msscasucompanion.web.model.CompanionList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -40,7 +41,14 @@ public class CompanionServiceImpl implements CompanionService {
         log.debug("getById()...");
         return companionMapper.companionEntityToCompanionDto(
                 companionRepository.findById(id)
-                        .orElseThrow(() -> new CompanionException(ErrorCodeMessages.COMPANION_NOT_FOUND, "")));
+                        .orElseThrow(() -> CompanionException
+                                .builder()
+                                .httpStatus(HttpStatus.BAD_REQUEST)
+                                .apiCode(ErrorCodeMessages.COMPANION_NOT_FOUND_API_CODE)
+                                .error(ErrorCodeMessages.COMPANION_NOT_FOUND_ERROR)
+                                .message(ErrorCodeMessages.COMPANION_NOT_FOUND_MESSAGE)
+                                .solution(ErrorCodeMessages.COMPANION_NOT_FOUND_SOLUTION)
+                                .build()));
     }
 
     @Override
@@ -65,7 +73,14 @@ public class CompanionServiceImpl implements CompanionService {
     public void updateById(UUID id, Companion companion) {
         log.debug("updateById...");
         CompanionEntity companionEntity = companionRepository.findById(id)
-                .orElseThrow(() -> new CompanionException(ErrorCodeMessages.COMPANION_NOT_FOUND, ""));
+                .orElseThrow(() -> CompanionException
+                        .builder()
+                        .httpStatus(HttpStatus.BAD_REQUEST)
+                        .apiCode(ErrorCodeMessages.COMPANION_NOT_FOUND_API_CODE)
+                        .error(ErrorCodeMessages.COMPANION_NOT_FOUND_ERROR)
+                        .message(ErrorCodeMessages.COMPANION_NOT_FOUND_MESSAGE)
+                        .solution(ErrorCodeMessages.COMPANION_NOT_FOUND_SOLUTION)
+                        .build());
 
         companionEntity.setDocumentTypeId(companion.getDocumentTypeId());
         companionEntity.setName(companion.getName());
